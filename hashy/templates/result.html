@@ -1,0 +1,317 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>Email detection Classification Result</title>
+        
+        <style>
+            /* Custom styles */
+            body {
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+
+            .result-block {
+                width: 100%;
+                height: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin-top: 200px;
+            
+            }
+
+            .alert-box {
+                flex: 1;
+                margin: 20px;
+                border-radius: 10px;
+            }
+            .alert-box h4 {
+                font-size: 30px;
+                margin-bottom: 50px;
+                margin-left: 160px;
+            }
+
+            .alert-box p {
+                font-size: 25px;
+                line-height: 1.5;
+                margin-left: 120px;
+            }
+            .alert-primary {
+                background-color: #007bff;
+                color: #fff;
+            }
+
+            .alert-secondary {
+                background-color: #6c757d;
+                color: #fff;
+            }
+
+            .alert-success {
+                background-color: #28a745;
+                color: #fff;
+            }
+        </style>
+    </head>
+
+    <style>
+    .top-text {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #888;
+    color: #fff;
+    text-align: center;
+    font-size: 14px;
+    }
+
+    .logo {
+                position: absolute;
+                top: 20px;
+                right: 20px;
+                width: 100px;
+                height: 100px;
+            }
+            .logo {
+      display: flex;
+      justify-content: center;
+      margin-top: 40px; /* Adjust the margin as needed */
+    }
+    .logo {
+            /* Add a black border around the logo container */
+            padding: 10px; /* Add some padding for better visibility */
+            width: 200px;
+            height: auto;
+        }
+    .logo4 {
+                position: absolute;
+                top: 45px;
+                left: 20px;
+                width: 100px;
+                height: 100px;
+            }
+    
+    .bottom-text {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    background-color: #fff;
+    color: #888;
+    text-align: center;
+    font-size: 14px;
+    }
+
+    .instru{
+ 
+    text-align: left;
+    margin-left: 15px; 
+
+    }
+  
+    
+    </style>
+
+    <div class="top-text">
+        Made by El amarti Abderrahmane / STAGE PFE / FLASK_APP
+    </div>
+
+    <div class="logo">
+        <img src="https://www.cimcor.com/hs-fs/hubfs/assets/images/logos/resellers/Data%20Protect.png?width=1868&height=392&name=Data%20Protect.png" alt="Logo" style="width: 200px; height: auto;">
+    </div>
+    <div class="logo4">
+      <img src="https://th.bing.com/th/id/R.aa9cfe3168ebdd1e661c1a9e8ce31bd6?rik=9bAyH3Qlyr%2b4Bw&riu=http%3a%2f%2fmoodle.ensaj.ucd.ac.ma%2fpluginfile.php%2f1%2ftheme_klass%2ffooterlogo%2f1600381331%2fLogo_Ensaj.png&ehk=EudpKMopNyH7UlFOtAiomqknmWpjdstTOyI0Anw4fP0%3d&risl=&pid=ImgRaw&r=0"  alt=" Logo" style="width: 130px; height: auto;">
+    </div>
+
+    <div class="bottom-text">
+        Année universitaire 2022/2023
+    </div>
+
+    <body>
+        <div class="result-block">
+            <div class="alert-box alert-secondary" role="alert">
+                <h4>Domain</h4>
+                <p>"{{domain_result}}"</p>
+            </div>
+            <div class="alert-box alert-primary" role="alert">
+                <h4>Body</h4>
+                <p class="h5">"{{body_result}}"</p>
+            </div>
+            
+            <div class="alert-box alert-success" role="alert">
+                <h4>Subject</h4>
+                <p>"{{subject_result}}"</p>
+            </div>
+        </div>
+    
+       
+  
+        <div style="height: 300px; overflow-y: scroll;">
+        <h2 class="instru">Instructions:</h2>
+        <p><ul>
+          <li>
+            <strong>If the subject result is 'Not a Phishing attempt', the domain result is 'Not Malicious', and the body result is 'Not a Phishing attempt':</strong>
+            <br>
+            Result: All Safe - The email appears to be safe.
+            <br>
+            
+          </li>
+          <li>
+            <strong>If the subject result is 'Phishing attempt', the domain result is 'Malicious', and the body result is 'Phishing attempt':</strong>
+            <br>
+            Result: All Phishing - The email is highly likely to be a phishing attempt. Exercise extreme caution.
+            <br>
+  
+          </li>
+          <li>
+            <strong>If the subject result is 'Not a Phishing attempt', the domain result is 'Malicious', and the body result is 'Not a Phishing attempt':</strong>
+            <br>
+            Result: Malicious Domain - The email is likely a phishing attempt or spam. Be cautious when interacting with it.
+            <br>
+          
+          </li>
+          <li>
+            <strong>If the subject result is 'Not a Phishing attempt', the domain result is 'Not Malicious', and the body result is 'Phishing attempt':</strong>
+            <br>
+            Result: Phishing Body - Additional reasoning with the domain is required. Investigate the email further.
+            <br>
+           
+          </li>
+          <li>
+            <strong>If the subject result is 'Phishing attempt', the domain result is 'Not Malicious', and the body result is 'Not a Phishing attempt':</strong>
+            <br>
+            Result: Phishing Subject - Additional reasoning with the domain is required. Investigate the email further.
+            <br>
+          
+          </li>
+          <li>
+            <strong>If the subject result is 'Phishing attempt', the domain result is 'Not Malicious', and the body result is 'Phishing attempt':</strong>
+            <br>
+            Result: Phishing Body/Subject - Additional reasoning with the domain is required. Investigate the email further.
+            <br>
+           
+          </li>
+          <li>
+            <strong>If the subject result is 'Not a Phishing attempt', the domain result is 'Malicious', and the body result is 'Phishing attempt':</strong>
+            <br>
+            Result: Phishing Body/Domain - The email is likely a phishing attempt or spam. Be cautious when interacting with it.
+            <br>
+           
+          </li>
+  
+          <li>
+            <strong>If the subject result is 'Phishing attempt', the domain result is 'Malicious', and the body result is 'Not a Phishing attempt':</strong>
+            <br>
+            Result: Phishing Domain/Subject - The email may be a phishing attempt. Carefully examine the email content.
+            <br>
+           
+          </li>
+         
+           
+          </li>
+          
+        </ul>
+        
+ </p></div>
+       
+         
+    </div>
+      <style>
+        .info-box {
+          position: fixed;
+          bottom: 20px;
+          right: 20px;
+          background-color: #f8f8f8;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+          padding: 10px;
+          font-size: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+      
+      .info-box p {
+        font-size: 24px;
+        line-height: 1;
+        margin: 0;
+        text-align: left;
+      }
+      
+      
+      
+        .info-box .tooltip {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 400px;
+          max-height: 600px;
+          overflow-y: auto;
+          padding: 20px;
+          background-color: rgba(128, 128, 128, 0.8);
+          color: #fff;
+          border-radius: 5px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+          display: none;
+          z-index: 9999;
+        }
+      
+        .info-box .tooltip p {
+          font-size: 16px;
+          line-height: 1.5;
+          margin: 0;
+          text-align: justify;
+        }
+      
+      </style>
+      
+      <div class="info-box">
+        <p>i</p>
+        <div class="tooltip">
+          <p>
+            This model is an email phishing detection system that utilizes Natural Language Processing (NLP) techniques and integrates with the VirusTotal service. The goal of the model is to identify and classify emails as either legitimate or a phishing attempt based on their "subject and body content" and "domain from email source".
+
+            Here are some key points about the model:
+            
+            Dataset: The dataset used for training and testing the model consists of 5,171 emails. Out of these, 3,672 emails are classified as legitimate and 1,499 emails are classified as phishing.
+            
+            NLP Algorithms: Several NLP algorithms were compared to select the best model with the highest accuracy. The model evaluated different techniques to process and analyze the text data in the emails.
+            
+            Model Performance: The model's performance was assessed using different evaluation metrics. 
+            
+            The accuracy of   Multinomial Naive Bayes (MNB): 90.95%
+            
+            Model Usage: This model can serve as a robust foundation for email phishing detection systems. It demonstrates the effectiveness of NLP techniques in analyzing email content and accurately classifying them as ham or phish. The model's high accuracy makes it a powerful tool for identifying potentially malicious emails and protecting users from phishing attacks.
+            
+            Integration with VirusTotal: The model incorporates the VirusTotal service, utilizing its API key for additional analysis. VirusTotal is a platform that examines files and URLs for potential threats by scanning them with various antivirus engines. The integration with VirusTotal enhances the model's ability to detect and identify suspicious emails.
+            
+            Flask App: The model can be deployed as a Flask web application, allowing users to interact with it through a user-friendly interface. The Flask app provides a convenient way to input emails and receive real-time phishing detection results, making it practical for integration into email client systems or security applications.
+            
+            By combining the power of the NB algorithm, and the integration with VirusTotal, this model offers an efficient solution for email phishing detection. Its high accuracy and potential for integration make it a valuable tool for safeguarding against phishing attacks in various domains.
+        </div>
+      </div>
+      
+      <script>
+        const infoBox = document.querySelector('.info-box');
+        const tooltip = infoBox.querySelector('.tooltip');
+        let tooltipVisible = false;
+      
+        infoBox.addEventListener('click', () => {
+          if (tooltipVisible) {
+            tooltip.style.display = 'none';
+            tooltipVisible = false;
+          } else {
+            tooltip.style.display = 'block';
+            tooltipVisible = true;
+          }
+        });
+      </script>
+      
+
+</body>
+
+</html>
